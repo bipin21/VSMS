@@ -1,2 +1,2 @@
 # VSMS
-Valiant stock management system
+stock management system
