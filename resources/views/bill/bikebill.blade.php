@@ -126,18 +126,16 @@ if (isset($_POST['VatBill']) || isset($_POST['NormalBill'])) {
                   </style>
                     <!--col -->
 					<form action="vatbill" method="post">
-                    <div class="title" style="z-index:1; position:fixed; width:80%; height:6%; background:#09649a !important; color:white; top: 19%;" >
-                     <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs" >
-					 <li class="nab"><a href="#"><i class="fa fa-floppy-o"> Save </i></a><li>
-					 <li class="nab">
-					 
-					 <input type="button" value="Print" class="btn" onclick="PrintDoc('printarea')"/>
-              
-                    <input type="button" value="Print Preview" class="btn" onclick="PrintPreview('printarea')"/>
-					 <input type="submit" name="VatBill"><i class="fa fa-print"> Print VAT Bill</i>
-					 </li>
-					 <li class="nab"><input type="submit" name="NormalBill"><i class="fa fa-print"> Print Normal Bill</i></a></li>
-					 <li class="nab"><a href="#"><i class="fa fa-trash"> Delete </i></a></li>
+                    <div class="title" style="z-index:1; position:fixed; width:80%; height:30px; background:#09649a !important; color:white; top:19%" >
+                     <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs" style="height:30px">
+					 <li class="nab"><a href="#" style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
+    min-height: 30px !important;"><i class="fa fa-floppy-o"> Save </i></a><li>
+					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
+    min-height: 30px !important;" ><i class="fa fa-print"> Print VAT Bill</i></a></li>
+					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
+    min-height: 30px !important;"><i class="fa fa-print"> Print Normal Bill</i></a></li>
+					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
+    min-height: 30px !important;"><i class="fa fa-trash"> Delete </i></a></li>
 					 </ul>
                      </div>
                         <div class="white-box" style=" height: 440px; padding:0 !important; margin-top: 40px;">
@@ -581,6 +579,7 @@ var index1 = 1;
                 var cell2=row.insertCell(1);
                 var t2=document.createElement("select");
                     t2.id = "txtDescription"+index;
+					$(t2).width(305);
                     cell2.appendChild(t2);
                 var cell3=row.insertCell(2);
                 var t3=document.createElement("input");
