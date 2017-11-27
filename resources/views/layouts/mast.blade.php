@@ -89,6 +89,7 @@
                                   <li><a href="bikebill">Bike</a></li>
                                   <li><a href="partsbill">Parts</a></li>
                                   <li><a href="testbill">Tests</a></li>
+                                  <li><a href="printbill">Print</a></li>
           
                                 </ul>
                     </li>

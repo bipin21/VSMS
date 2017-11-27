@@ -204,5 +204,15 @@ class BillController extends Controller
             return redirect()->back();
         }
     }
-
+ public function print()
+    {
+        if(Auth::user()){
+            // $b=DB::select('SELECT *  FROM `bikes` where status=0 ');
+//            $q=DB::table('product')->get();
+        return view('bill.printbill');
+             }
+        else{
+            return redirect()->back();
+        }
+    }
 }

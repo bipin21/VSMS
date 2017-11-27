@@ -1,20 +1,7 @@
 @extends('layouts.mast')
 @section('content')
-<!-- <?php
-
-if (isset($_POST['VatBill']) || isset($_POST['NormalBill'])) {
-    // handle textarea
-
-    if (!empty($_POST['VatBill'])) {
-        header('Location: /vat-bill.blade.php');
-        exit();
-    }
-
-   // header('Location: /action2.php');
-    exit();
-}
-
-?> -->
+ <link rel='stylesheet' type='text/css' href='print/style.css' />
+  <link rel='stylesheet' type='text/css' href='print/print.css' media="print" />
  
         <!-- Page Content -->
         <div class="navbar-static-top" id="wrapper" style="top: 10%; overflow: hidden; position: fixed;">
@@ -130,7 +117,7 @@ if (isset($_POST['VatBill']) || isset($_POST['NormalBill'])) {
                      <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs" style="height:30px">
 					 <li class="nab"><a href="#" style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
     min-height: 30px !important;"><i class="fa fa-floppy-o"> Save </i></a><li>
-					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
+					 <li class="nab"><a href="#"  onclick='printDiv();' style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
     min-height: 30px !important;" ><i class="fa fa-print"> Print VAT Bill</i></a></li>
 					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
     min-height: 30px !important;"><i class="fa fa-print"> Print Normal Bill</i></a></li>
@@ -154,7 +141,7 @@ if (isset($_POST['VatBill']) || isset($_POST['NormalBill'])) {
 
                                 <div id="myTabContent" class="tab-content" style="margin-top:5px !important;">
                                     <div class="tab-pane fade in active" id="home_else">
-                                     <table border=1>
+                                 <!--    <table border=1>
 <tr>
 <td>
 <style>
@@ -179,471 +166,119 @@ input{
 	line-height: 0;
 }
 
-</style>
-<style type="text/css" media="print">
-.dontprint
-{ display: none; }
-#printarea {display: block}
-</style>
+</style> -->
+
 <div id="printarea">
-<div class="customer">
-<table>
-<tr>
-<th>Customer</th>
-<td><input name="customer"/></td>
-</tr>
-<tr>
-<th>Contact</th>
-<td><input name="contact" /></td>
-</tr>
-<tr>
-<th>Address</th>
-<td><textarea style="width:100%;"  name="address"></textarea></td>
-</tr>
-<tr>
-<th>Customer PAN</th>
-<td><input /></td>
-</tr>
-</table>
+<div id="page-wrap">
+
+    <textarea id="header">TAX INVOICE</textarea>
+    
+    <div id="identity">
+     <textarea id="address">Customer Name:
+Street Name
+Location
+Phone: </textarea>
+<div id="pan">
+<textarea>
+PAN: </textarea>
 </div>
+ <div class="seller">
+<textarea id="logo">Seller's Name & Address:
+TVS SHOWROOM SINDHULI NEPAL
+PAN NO: 23749277
+Branch:Sindhuli  Phone:9843837438
+E-mail:tvs@hotmail.com </textarea>
+            </div>
+    
+    </div>
+    
+    <div style="clear:both"></div>
+    <div class="manual_date">
+      <textarea id="today_date">Date: December 15, 2017 </textarea>
+     </div>
+    <div id="customer">
+     <table id="meta">
+                <tr>
+                    <td class="meta-head">Invoice #</td>
+                    <td><textarea>000123</textarea></td>
+                </tr>
+                </table>
+    
+    </div>
+    
+    <table id="items">
+    
+      <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Unit Cost</th>
+          <th>Quantity</th>
+          <th>Price</th>
+      </tr>
+      
+      <tr class="item-row">
+          <td class="item-name"><div class="delete-wpr"><textarea>Web Updates</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
+          <td class="description"><textarea>Monthly web updates for http://widgetcorp.com (Nov. 1 - Nov. 30, 2009)</textarea></td>
+          <td><textarea class="cost">$650.00</textarea></td>
+          <td><textarea class="qty">1</textarea></td>
+          <td><span class="price">$650.00</span></td>
+      </tr>
+      
+      <tr class="item-row">
+          <td class="item-name"><div class="delete-wpr"><textarea>SSL Renewals</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
 
-<div class= "transaction" style="margin-left: 500px; margin-top: -117px;" >
-<table>
-<tr>
-<th>Invoice#</th>
-<td><input name="invoice" /></td>
-</tr>
-<tr>
-<th>Transaction Date</th>
-<td><input name="transaction_date" /></td>
-</tr>
-<tr>
-<th>Customer Ref. No</th>
-<td><input name="customer_ref_no" /></td>
-</tr>
-<tr>
-<th>Contact Person</th>
-<td><input name="contact_person" /></td>
-</tr>
-<tr>
-<th>Contact Person Address</th>
-<td><input name="contact_address"/></td>
-</tr>
-</table>
-</div>
-<hr/>
-<span onclick="insertRow('myTable');"> 
-<a href="#"><i class="fa fa-plus">Add Row</i></a></span>
-<hr/>
+          <td class="description"><textarea>Yearly renewals of SSL certificates on main domain and several subdomains</textarea></td>
+          <td><textarea class="cost">$75.00</textarea></td>
+          <td><textarea class="qty">3</textarea></td>
+          <td><span class="price">$225.00</span></td>
+      </tr>
+      
+      <tr id="hiderow">
+        <td colspan="5"><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
+      </tr>
+      
+      <tr>
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Subtotal</td>
+          <td class="total-value"><div id="subtotal">$875.00</div></td>
+      </tr>
+      <tr>
 
-<div class="addItem" style="margin:3px;">
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Total</td>
+          <td class="total-value"><div id="total">$875.00</div></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Amount Paid</td>
 
-<div class="col-md-12" style="width:100%;">
-<table border=1px; style="width:100%;" id="myTable">
-<tr>
-<th  style="width:20px !important;">S.N.</th>
-<th style="width:305px !important;">Description of Goods</th>
-<th>QTY</th>
-<th>UOM</th>
-<th>Original Rate</th>
-<th>Unit Rate</th>
-<th>Discount %</th>
-<th>Amount</th>
-</tr>
-<tr id="rows">
-<td>1</td>
-<td style="width: 30px;"><select style="width:100%;"/></td>
-<td><input name="quantity" id="quantity" type="text"/></td>
-<td><input name="uom" id="uom" type="text"/></td>
-<td><input name="originalRate" id="originalRate" type="text"/></td>
-<td><input name="unitRate" id="unitRate" type="text"/></td>
-<td><input name="discount" id="discount" type="text"/></td>
-<td><span id="amount"></span></td>
-</tr>
-
-</table>
-<table border=1px; style="width:100%;">
-<tr>
-<td style="width:427px !important;" colspan=2>Total</td>
-<td style="width: 105px !important;"><span id="totalQuantity"></span></td>
-<td style="width: 105px !important;"></td>
-<td style="width: 105px !important;"><span id="totalOriginalRate"></span></td>
-<td style="width: 105px !important;"><span id="totalUnitRate"></span></td>
-<td style="width: 105px !important;"><span id="totalDiscount"></span></td>
-<td style="width: 105px !important;"><span id="totalItemAmount"></span></td>
-</tr>
-</table>
-</div>
-<div class="calculation pull-right" style="margin: 5px; 1px 0 0;">
-<table>
-<tr>
-<th>Sub Total:</th>
-<td style="text-align:right;"><b>NRs. <span id="subTotal">0.00</span></b></td>
-</tr>
-<tr>
-<th>Discount (0.00%):</th>
-<td><input id="netDiscount" type="text"/></td>
-</tr>
-<tr>
-<th>Taxable Amount:</th>
-<td style="text-align:right;"><b>NRs. <span id="totalTaxable"></span></b></td>
-</tr>
-<tr>
-<th>VAT @13%:</th>
-<td><span id="totalVat"></span></td>
-</tr>
-<tr>
-<th style="font-size: 14px;">Total Amount:</th>
-<td style="text-align:right; font-size: 14px;"><b>NRs. <span id="result"></span></b></td>
-</tr>
-</table>
-</div>
-
-<div class="narration pull-left" style="margin-top: 30px;">
-<table>
-<tr>
-<td>Narration</td>
-<td style="width: 500px;"><textarea style="width: 100%;"></textarea></td>
-</tr>
-
-<tr>
-<td>Amount in words:</td>
-<td style="width: 500px;"><input style="width:100%;"/></td>
-</tr>
-
-</table>
+          <td class="total-value"><textarea id="paid">$0.00</textarea></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line balance">Balance Due</td>
+          <td class="total-value balance"><div class="due">$875.00</div></td>
+      </tr>
+    
+    </table>
+    
+    <div id="terms">
+      <h5>Terms</h5>
+      <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
+    </div>
+  
+  </div>
 </div>
 </div>
-
-
-
-<!--Main table ending starts-->
-</td>
-</tr>
-</table>
-                                    </div>
-                                    <div class="tab-pane fade" id="profile_else">
-                                        <table border=1>
-<tr>
-<td>
-<style>
-.customer th, td, .transaction th, td, .addItem th, td{
-	font-size:11px;
-	text-align:left;
-
-}
-.customer{
-	margin: 1px 0 0 1px;
-}
-.transaction{
-	margin:-96px 1px 0 500px;
-}
-table{
-	border-spacing:0;
-}
-table .addItem{
-	width:100%;
-}
-input{
-	line-height: 0;
-}
-
-</style>
-
-<div class="customer">
-<table>
-<tr>
-<th>Customer</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Contact</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Address</th>
-<td><textarea style="width:100%;" ></textarea></td>
-</tr>
-<tr>
-<th>Customer PAN</th>
-<td><input /></td>
-</tr>
-</table>
 </div>
+<script src="resources/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src='print/jquery.jqprint-0.3.js'></script>
 
-<div class= "transaction" style="margin-left: 500px; margin-top: -117px;" >
-<table>
-<tr>
-<th>Invoice#</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Transaction Date</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Customer Ref. No</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Contact Person</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Contact Person Address</th>
-<td><input /></td>
-</tr>
-</table>
-</div>
-<hr/>
-
-<span onclick="insertRow1('myTable1');">
-<a href="#"><i class="fa fa-plus">Add Row</i></a></span>
-<hr/>
-
-<div class="addItem" style="margin:3px;">
-
-<div class="col-md-12" style="width:100%;">
-<table border=1px; style="width:100%;" id="myTable1">
-<tr>
-<th  style="width:20px !important;">S.N.</th>
-<th style="width:305px !important;">Description of Goods</th>
-<th>QTY</th>
-<th>UOM</th>
-<th>Original Rate</th>
-<th>Unit Rate</th>
-<th>Discount %</th>
-<th>Amount</th>
-</tr>
-<tr>
-<td>1</td>
-<td style="width: 30px;"><select style="width:100%;"/></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-</tr>
-
-</table>
-<table border=1px; style="width:100%;">
-<tr>
-<td style="width:427px !important;" colspan=2>Total</td>
-<td style="width: 105px !important;"><input /></td>
-<td style="width: 105px !important;"><input /></td>
-<td style="width: 105px !important;"><input /></td>
-<td style="width: 105px !important;"><input /></td>
-<td style="width: 105px !important;"><input /></td>
-<td style="width: 105px !important;"><input /></td>
-
-</tr>
-</table>
-</div>
-<div class="calculation pull-right" style="margin: 5px; 1px 0 0;">
-<table>
-<tr>
-<th>Sub Total:</th>
-<td style="text-align:right;"><b>NRs. 0.00</b></td>
-</tr>
-<tr>
-<th>Discount (0.00%):</th>
-<td><input /></td>
-</tr>
-<tr>
-<th>Taxable Amount:</th>
-<td style="text-align:right;"><b>NRs. 0.00</b></td>
-</tr>
-<tr>
-<th>VAT @13%:</th>
-<td><span id="vat"></span></td>
-</tr>
-<tr>
-<th style="font-size: 14px;">Total Amount:</th>
-<td style="text-align:right; font-size: 14px;"><b>NRs. 0.00</b></td>
-</tr>
-</table>
-</div>
-
-<div class="narration pull-left" style="margin-top: 30px;">
-<table>
-<tr>
-<td>Narration</td>
-<td style="width: 500px;"><textarea style="width: 100%;"></textarea></td>
-</tr>
-
-<tr>
-<td>Amount in words:</td>
-<td style="width: 500px;"><input style="width:100%;"/></td>
-</tr>
-
-</table>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-						</form>
-                    </div>
-                    <!-- /.col -->
-                </div>
-
-            
-<script src="http://code.jquery.com/jquery-latest.min.js""></script>
-
-		
-			<script type="text/javascript">
-/*--This JavaScript method for Print command--*/
-    function PrintDoc(area) {
-        var toPrint = document.getElementById(area);
-        var popupWin = window.open('', '_blank','location=no');
-        popupWin.document.open();
-        popupWin.document.write('<html><title>::Preview::</title><link rel="stylesheet" type="text/css" href="print.css" /></head><body onload="window.print()">')
-        popupWin.document.write(toPrint.innerHTML);
-        popupWin.document.write('</html>');
-        popupWin.document.close();
-    }
-/*--This JavaScript method for Print Preview command--*/
-    function PrintPreview() {
-        var toPrint = document.getElementById('printarea');
-        var popupWin = window.open('', '_blank', 'location=no,left=200px');
-        popupWin.document.open();
-        popupWin.document.write('<html><title>::Print Preview::</title><link rel="stylesheet" type="text/css" href="Print.css" media="screen"/></head><body">')
-        popupWin.document.write(toPrint.innerHTML);
-        popupWin.document.write('</html>');
-        popupWin.document.close();
-    }
-
- //$("#treeview").hummingbird();
- var tableCount={};
- var index = 1;
-    function insertRow(id){
-		console.log(id);
-                var table=document.getElementById(id);
-                var row=table.insertRow(table.rows.length);
-                var cell1=row.insertCell(0);
-                var t1=document.createElement("input");
-					t1.value=index+1;
-                    t1.id = "txtSn"+index;
-                    cell1.appendChild(t1);
-                var cell2=row.insertCell(1);
-                var t2=document.createElement("select");
-				$(t2).width(305);
-                    t2.id = "txtDescription"+index;
-                    cell2.appendChild(t2);
-                var cell3=row.insertCell(2);
-                var t3=document.createElement("input");
-                    t3.id = "txtQty"+index;
-                    cell3.appendChild(t3);
-                var cell4=row.insertCell(3);
-                var t4=document.createElement("input");
-                    t4.id = "txtUom"+index;
-                    cell4.appendChild(t4);
-				var cell5=row.insertCell(4);
-                var t5=document.createElement("input");
-                    t5.id = "txtOriginal"+index;
-                    cell5.appendChild(t5);
-				var cell6=row.insertCell(5);
-                var t6=document.createElement("input");
-                    t6.id = "txtUnit"+index;
-                    cell6.appendChild(t6);
-				var cell7=row.insertCell(6);
-                var t7=document.createElement("input");
-                    t7.id = "txtDiscount"+index;
-                    cell7.appendChild(t7);
-				var cell8=row.insertCell(7);
-                var t8=document.createElement("input");
-                    t8.id = "txtAmount"+index;
-                    cell8.appendChild(t8);
-
-		  tableCount.rows=index++;
-		  console.log(tableCount);
-		  
-		  
-    }
-	console.log("totalRows:"+(tableCount.rows));
-	
-var index1 = 1;
-
-    function insertRow1(id){
-		console.log(id);
-                var table=document.getElementById(id);
-                var row=table.insertRow(table.rows.length);
-                var cell1=row.insertCell(0);
-                var t1=document.createElement("input");
-					t1.value=index1+1;
-                    t1.id = "txtSn"+index;
-                    cell1.appendChild(t1);
-                var cell2=row.insertCell(1);
-                var t2=document.createElement("select");
-                    t2.id = "txtDescription"+index;
-					$(t2).width(305);
-                    cell2.appendChild(t2);
-                var cell3=row.insertCell(2);
-                var t3=document.createElement("input");
-                    t3.id = "quantity"+index;
-                    cell3.appendChild(t3);
-                var cell4=row.insertCell(3);
-                var t4=document.createElement("input");
-                    t4.id = "uom"+index;
-                    cell4.appendChild(t4);
-				var cell5=row.insertCell(4);
-                var t5=document.createElement("input");
-                    t5.id = "originalRate"+index;
-                    cell5.appendChild(t5);
-				var cell6=row.insertCell(5);
-                var t6=document.createElement("input");
-                    t6.id = "unitRate"+index;
-                    cell6.appendChild(t6);
-				var cell7=row.insertCell(6);
-                var t7=document.createElement("input");
-                    t7.id = "discount"+index;
-                    cell7.appendChild(t7);
-				var cell8=row.insertCell(7);
-                var t8=document.createElement("input");
-                    t8.id = "amount"+index;
-                    cell8.appendChild(t8);
-          tableCount1=index1++;
-		  
-
-    }
-	
-	$(window).load(function(){
-    $('input').keyup(function () { 
-	   var quantity = parseInt(document.getElementById("quantity").value);
-	   var originalRate = parseFloat(document.getElementById("originalRate").value);
-	   var unitRate= parseFloat(document.getElementById("unitRate").value);
-	   var discount= parseFloat(document.getElementById("discount").value);
-	   if(!unitRate && !discount){
-		   var itemAmount="";
-	   }else if(!discount){
-		   var itemAmount= (quantity*unitRate);
-	   }else{
-	   var itemAmount= ((quantity*unitRate)-(discount/100)*(quantity*unitRate));
-	   }
-	   
-	   
-	   console.log(quantity);
-	  
-		$('#amount').text(itemAmount);
-		
-	
-		$('#subTotal').text(itemAmount);
-		
-		var netDiscountAmount=parseFloat(document.getElementById("netDiscount").value);
-		$('#netDiscount').text(itemAmount);
-		
-		var taxableAmount=(subTotalAmount-netDiscountAmount);
-		$('#totalTaxable').text(itemAmount);
-		
-		var vatAmount=(taxableAmount*(13/100));
-		$('#vat').text(vatAmount);
-		var payable=(taxableAmount-vatAmount);
-        $('#result').text(payable);
-    });    
-});
+<script type='text/javascript' src='print/example.js'></script>
+<script type="text/javascript">
+  function printDiv(){
+    //alert("clicked");
+     $('#printarea').jqprint();
+  }
 </script>
-
 @endsection

@@ -23,7 +23,10 @@ Route::post('save', 'Invoice@save');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', ['uses'=>'AttendenceController@create','as'=>'attendence.add']);
-
+Route::post('/addenquiry', [
+    'uses'=>'EnquiryController@create',
+    'as'=>'enquiry.add'
+]);
 /*Bar Chart*/
 //Route::get('chartjs', 'HomeController@chartjs');
 
@@ -67,6 +70,7 @@ Route::post('partsbillsave', 'BillController@partsbillsave');
 Route::get('/testbill', 'BillController@test');
 Route::post('/testbill', 'BillController@testsave');
 
+Route::get('/printbill', 'BillController@print');
 
 Route::resource('customers','CustomerController');
 
