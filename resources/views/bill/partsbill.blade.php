@@ -44,7 +44,7 @@
            var n=($('.body tr').length-0)+1;
            var tr='<tr><th class="no">'+n+'</th>'+
     '<td><select name="product_id[]" class="form-control product_id">'+product+'</select></td>'+
-        '<td> @foreach($data as $rr)<input style="display:none;" type="text" name="reg_no[]" class="qty form-contol" value="{{ $rr->parts_no }}" >@endforeach</td>'+
+        '<td> @foreach($data as $rr)<input style="display:none;" type="text" name="reg_no[]" class="qty form-contol" value="{{ $rr->parts_no }}" ><input style="" type="text" name="parts_name[]" class="qty form-contol" value="{{ $rr->parts_name }}" >@endforeach</td>'+
             '<td><input type="text" name="price[]" class="price form-contol"></td>'+
             '<td><input type="number" name="dis[]" class="dis form-contol"></td>'+
             '<td><input type="text" name="amount[]" class="amount form-contol"></td>'+
@@ -99,7 +99,7 @@
           <td>Custom Phone</td><td><input type="text" class="form-control" name="customerphone"/></td>
     </tr>
 </table>
-<input type="submit" value="Order" name="save" class="btn btn-primary"/>
+
 <table class="table table-bordered table-hover">
     <thead>
     <th>N</th>
@@ -123,7 +123,7 @@
             <select name="product_id[]" class="form-control product_id">
                 <option>select</option>
                 @foreach($data as $r)
-                <option data-price="{{ $r->price }}" value="{{ $s = $r->id }}">
+                <option data-price="{{ $r->price }}" value="{{  $r->id }}">
                 {{ $r->parts_name }}</option>
                 @endforeach
                 </select>
@@ -132,7 +132,8 @@
             @foreach($data as $rr)
             <div style="display:none;">{{$s1=$rr->id}}</div>
            
-        <input style="" type="text" name="reg_no[]" class="qty form-contol" value="{{ $rr->parts_no }}" >
+        <input style="display:none;" type="text" name="reg_no[]" class="qty form-contol" value="{{ $rr->parts_no }}" >
+        <input style="display:none;" type="text" name="parts_name[]" class="qty form-contol" value="{{ $rr->parts_name }}" >
          
              @endforeach
         </td>
@@ -153,13 +154,13 @@
     </tbody>
     <tfoot>
         <tr> <th colspan="7">Total <b class="total">0</b></th></tr>
-        <tr><th colspan="7">GetMoney <input type="text" class="getmoney form-control"/></th></tr>
+        <tr><th colspan="7">GetMoney <input type="text" name="debit" class="getmoney form-control"/></th></tr>
         <tr>
         <th colspan="7">BackMoney <input type="text" class="backmoney form-control"/></th></tr>
     
     </tfoot>
 </table>
-
+<input type="submit" value="Save Sales Part" name="save" class="btn btn-primary"/>
 </form>
 
     

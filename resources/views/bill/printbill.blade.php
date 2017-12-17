@@ -8,10 +8,10 @@
   
   <title>TVS SHOWROOM SINDHULI</title>
   
-  <link rel='stylesheet' type='text/css' href='print/style.css' />
-  <link rel='stylesheet' type='text/css' href='print/print.css' media="print" />
-  <script type='text/javascript' src='print/jquery-1.3.2.min.js'></script>
-  <script type='text/javascript' src='print/example.js'></script>
+  <link rel='stylesheet' type='text/css' href="{{ asset('print/style.css')}}" />
+  <link rel='stylesheet' type='text/css' href="{{ asset('print/print.css')}}" media="print" />
+  <script type='text/javascript' src="{{ asset('print/jquery-1.3.2.min.js')}}"></script>
+  <script type='text/javascript' src="{{ asset('print/example.js')}}"></script>
 
 </head>
 

@@ -49,7 +49,7 @@
                 <div class="top-left-part text-center"><a class="logo" href=""><b>VSMS</b></a></div>
                 <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
                     <li>
-                        <a href="home" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
+                        <a href="../../home" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
                         <!--                        <a href="" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">Purchase</span></a>-->
@@ -101,7 +101,7 @@
 					<li>
                         <a href="../../staff" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i>Staff</a>                    </li>
                     <li>
-                        <a href="../../form" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i>Invoice</a>                    </li>
+                        <a href="../../ledger" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i>Ledger</a>                    </li>
                     <li>
                         <a href="../../enquiry" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i>Enquiry</a>                    </li>
                 </ul>

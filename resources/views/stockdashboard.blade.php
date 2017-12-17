@@ -2,20 +2,23 @@
 @section('content')
 
         <!-- Page Content -->
-        <div class="navbar-static-top" id="wrapper" style="top: 10%; overflow: hidden; position: fixed;">
-            <div class="container-fluid">
+        <div class="navbar-static-top" id="wrapper" style="    top: 10%;
+    overflow: hidden;
+    position: fixed;
+    z-index: 0;">
+            
+
+<div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Dashboard</h4> </div>
-                        <span style="display:inline-block !important;  padding: 0; border-radius:3px; height:30px; width:500px;  ">
-<iframe style="margin-top: 2%;" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="http://rajanmaharjan.com.np/getdate/index.php?dateType=np" height="30"></iframe></span>
-
-
                         <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
-
+<span style="display:inline-block !important;  padding: 0; border-radius:3px; height:30px; width:500px;  ">
+<iframe style="margin-top: 2%;" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="http://rajanmaharjan.com.np/getdate/index.php?dateType=np" height="30"></iframe></span>
                         </div>
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
+                          
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -32,8 +35,8 @@
                                              <?php $c++ ?>
                                              @endif
                                              @endforeach
-                      <div class="pull-right col-md-12" style="padding: 0px; height:100%;  overflow-y: scroll;">
-                      <div class="title" style="position:fixed; width: auto">
+                      <div class="pull-right col-md-12" style="padding: 0px; height:440px;  overflow-y: scroll;">
+                      <div class="title" style="position:fixed;width: 300px;">
                        <pre style="background:#09649a !important; color:white">Notifications  {{ $c}}</pre>
                        </div>
                       <div class="white-box" style=" padding: 15px 3px 3px 3px !important">
@@ -48,13 +51,44 @@
                                               $_SESSION['left'] = $p->items; ?>
                             <div class="alert fade in" style="padding: 29px 0 0 0; margin-bottom:0 !important" >
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color: blue;">&times;</a>
-                              <pre style="background:red !important; color:white"><span style="color: blue;">Warning!!</span> The item count of <span style="color: black; font-weight: bold;">{{ $_SESSION['item'] }} Left {{ $_SESSION['left'] }}</span></pre>
+                              <pre style="background:#cd2f2f!important; color:#ddd;"><span style="color: #fff;">Warning!!</span> The item count of <span style="color: #fff; font-weight: bold;">{{ $_SESSION['item'] }} Left {{ $_SESSION['left'] }}</span></pre>
                             </div>
                             <?php @session_destroy(); ?>
                            @endif
                             @endforeach
 
-
+<!--                                      Code for to check customer service day is less than 7 days to come-->
+                                            @foreach($ddate as $ser)
+                                            
+                                        
+                                                @if($ser->servetime > $cdate)
+                                               <div style="display:none;">{{$diffd=(\Carbon\Carbon::parse($ser->servetime))->diffInDays($cdate)}}</div> 
+                                             
+                                                  @if($diffd>0 && 7 > $diffd )
+                                                @foreach($customer as $cst)
+                                                 <?php 
+                                                if($ser->cid==$cst->id){
+                                                    ?>
+                          <div class="alert fade in" style="padding: 29px 0 0 0; margin-bottom:0 !important" >
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color: blue;">&times;</a>
+                              <pre style="background:#cd2f2f!important; color:#ddd;"><span style="color: #fff;">Warning!!</span>Service Days For: <span style="color: #fff; font-weight: bold;"> <?php
+                                                   echo $ser->serv_name."Service Of<br> Customer  ".$cst->cusname."<br>only ".$diffd."days Left <br>ad: ".$cst->cusaddres.",ph: ".$cst->cusphone;
+                                                ?></span></pre>
+                            </div>
+                                          
+                                               
+                                              
+                                               
+                                                <?php
+                                                }
+                                                ?>
+                                                @endforeach
+                                                @endif
+                                                
+                                                @endif
+                                            
+<!--                                            End of service time comparision-->
+                                            @endforeach
                              <div class="alert fade in" style="padding: 0" >
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color: blue;">&times;</a>
                               <pre style="background:orange !important; color:white"><span style="color: blue;">Warning!!</span> The product count of <span style="color: black; font-weight: bold;"> {{ $p->product_name}} Left {{ $p->items }} </span></pre>
@@ -97,7 +131,8 @@
 
                                    <div class="form-group">
                                      <label for="eaddress">Address</label>
-                                     <input class="form-control" name="eaddress" type="text" id="address" required>
+                                     <input class="form-control" name="eaddress" type="text" id="address" style="width: 100%;
+    height: 100%;" required>
                                      </div>
                                      <div class="form-group">
                                      <label for="ephone"> Phone</label>

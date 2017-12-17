@@ -10,6 +10,8 @@ use App\Bike;
 use App\Part;
 
 use DateTime;
+use Excel;
+use Carbon\Carbon;
 class PurchaseController extends Controller
 {
     //
@@ -88,6 +90,76 @@ class PurchaseController extends Controller
         } 
     }
    
-  
+    //excel bike
+    
+    public function savebikes(Request $request){
+      if(Auth::user()){
+         if($request->hasFile('import_file')){
+			$path = $request->file('import_file')->getRealPath();
+
+			$data = Excel::load($path, function($reader) {})->get();
+             $cdate=Carbon::now();
+
+			if(!empty($data) && $data->count()){
+
+				foreach ($data->toArray() as $key => $value) {
+					if(!empty($value)){
+                                                
+						foreach ($value as $v) {		
+							$insert[] = ['model' => $v['model'], 'color' => $v['color'],'engine_number' => $v['engine_number'],'chasis_number' => $v['chasis_number'],'reg_no' => $v['reg_no'],'price' => $v['price'],'datetaken' =>$cdate,'status'=>0];
+						}
+					}
+				}
+
+				
+				if(!empty($insert)){
+					DB::table('bikes')->insert($insert);
+					return back()->with('success','Insert Record successfully.');
+				}
+
+			}
+
+		}
+
+		return back()->with('error','Please Check your file, Something is wrong there.');
+             }
+        else{
+            return redirect()->back();
+        }  
+  }
+    //excel part
+  public function saveparts(Request $request){
+      if(Auth::user()){
+         if($request->hasFile('import_file')){
+			$path = $request->file('import_file')->getRealPath();
+
+			$data = Excel::load($path, function($reader) {})->get();
+
+			if(!empty($data) && $data->count()){
+
+				foreach ($data->toArray() as $key => $value) {
+					if(!empty($value)){
+						foreach ($value as $v) {		
+							$insert[] = ['parts_no' => $v['parts_no'], 'parts_name' => $v['parts_name'],'price' => $v['price'],'status'=>0];
+						}
+					}
+				}
+
+				
+				if(!empty($insert)){
+					DB::table('parts')->insert($insert);
+					return back()->with('success','Insert Record successfully.');
+				}
+
+			}
+
+		}
+
+		return back()->with('error','Please Check your file, Something is wrong there.');
+             }
+        else{
+            return redirect()->back();
+        }  
+  }
 
 }

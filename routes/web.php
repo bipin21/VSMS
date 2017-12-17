@@ -27,6 +27,7 @@ Route::post('/addenquiry', [
     'uses'=>'EnquiryController@create',
     'as'=>'enquiry.add'
 ]);
+
 /*Bar Chart*/
 //Route::get('chartjs', 'HomeController@chartjs');
 
@@ -50,19 +51,37 @@ Route::get('/staff', 'StaffController@index')->name('staff');
 Route::get('/addstaff', 'StaffController@add')->name('staff');
 Route::post('/addstaff', ['uses'=>'StaffController@create','as'=>'staff.add']);
 
+
 Route::get('/customer', 'CustomerController@index')->name('customer');
 Route::post('/customer', 'CustomerController@customerservicesave')->name('customer');
+Route::post('/customer', ['uses'=>'CustomerController@update','as'=>'customersupdate.update']);
+
+Route::resource('customers','CustomerController');
+Route::resource('customerparts','CustomerPartController');
+//Route::resource('customersupdate','CustomerController');
 
 Route::get('/report', 'HomeController@report');
+//ledger 
+Route::get('/ledger', 'LedgerController@index');
+Route::post('/ledger', ['uses'=>'LedgerController@addledger','as'=>'ledger.add']);
+Route::resource('ledgers','LedgerController');
 
 Route::get('/service', 'ServiceController@index');
+Route::get('addserv', 'ServiceController@serv');
+Route::post('saveservice', 'ServiceController@saveservice');
+
 Route::post('/service',['uses'=>'ServiceController@addbikeservice','as'=>'bikeservice.add']);
 
-Route::get('/inventory', 'InventoryController@index')->name('inventory');
+Route::get('/inventoryt', 'InventoryController@indext')->name('inventory');
+Route::get('/inventory', 'InventoryController@indext')->name('inventory');
 Route::get('/inventoryparts', 'InventoryController@parts')->name('inventory');
+Route::post('importExcelPart', 'PurchaseController@saveparts');
+Route::post('importExcelBike', 'PurchaseController@savebikes');
 
 // Bill and Sales Management
+Route::get('/demobill', 'BillController@demo');
 Route::get('/bikebill', 'BillController@bike');
+Route::get('/vatbill', 'BillController@vat');
 Route::get('/partsbill', 'BillController@parts');
 Route::post('partssave', 'BillController@partssave');
 Route::post('partsbillsave', 'BillController@partsbillsave');
@@ -70,12 +89,15 @@ Route::post('partsbillsave', 'BillController@partsbillsave');
 Route::get('/testbill', 'BillController@test');
 Route::post('/testbill', 'BillController@testsave');
 
-Route::get('/printbill', 'BillController@print');
-
-Route::resource('customers','CustomerController');
 
 
 
+  Route::post('save_parts',['uses'=>'PurchaseController@saveparts','as'=>'save_parts.add']);
 
 
+//Route::get('importExport', 'MaatwebsiteDemoController@importExport');
+//Route::get('downloadExcel/{type}', 'MaatwebsiteDemoController@downloadExcel');
+
+
+//Credit debit
 

@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Input;
 use Auth;
 use App\Customer;
 use App\Service;
+use App\Customerservice;
 use DB;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -63,6 +65,29 @@ class CustomerController extends Controller
         $cs=Customer::find($id);
         $da=DB::select('select * from customerservices where cid="'.$id.'"');
         return view('customer.seedetail',array('user'=>Auth::user(),'d'=>$cs,'da'=>$da));
+    }  
+    
+    public function delete($id){
+        $cs=Customer::find($id);
+
+        return view('customer.customerparts',array('user'=>Auth::user(),'d'=>$cs));
+    }
+    public function update(Request $request){
+        
+         if(Auth::user()){
+            $post=$request->all();
+             $today=Carbon::now();
+             $data=array('serv_status'=>$post['servicestatus'],
+                        'message'=>$post['message'],
+                         'updated_at'=>$today
+                        );
+         $ct= Customerservice::find($post['serviceid']);
+             $ct->update($data);
+        return redirect()->back();
+             }
+        else{
+            return redirect()->back();
+        }
     }
 
 }

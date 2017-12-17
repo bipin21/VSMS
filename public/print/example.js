@@ -112,11 +112,11 @@ $(document).ready(function() {
   
   bind();
   
-  // $(".delete").live('click',function(){
-  //   $(this).parents('.item-row').remove();
-  //   update_total();
-  //   if ($(".delete").length < 2) $(".delete").hide();
-  // });
+  $(".delete").live('click',function(){
+    $(this).parents('.item-row').remove();
+    update_total();
+    if ($(".delete").length < 2) $(".delete").hide();
+  });
   
   $("#cancel-logo").click(function(){
     $("#logo").removeClass('edit');

@@ -85,6 +85,7 @@
 <div class="col-md-12">
 <form  action="{{action('BillController@testsave')}}" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token()}}" />
+<!--
 <table class="table">
     <tr>
         <td>Order Name</td><td><input type="text" class="form-control" name="ordername" required/></td>
@@ -99,8 +100,38 @@
           <td>Custom Phone</td><td><input type="text" class="form-control" name="customerphone" required/></td>
     </tr>
 </table>
+-->
+<table >
+        <tr >
+          <tr>
+          <th class="meta-head"  style="border: 0 !important">Invoice #</th>
+          <td style="border: 0 !important" ><input type="text" value="00123" name="ordername"/></td>
+          </tr>
+          <tr>
+          
+          <th style="border: 0 !important" >Date:</th>
+              <td style="border: 0 !important"><span id="">{{ new Date()}} </span></td><br/>
 
-<table class="table table-bordered table-hover">
+          </tr>
+          <tr>
+          <th style="border: 0 !important">Customer Name:</th>
+          <td style="border: 0 !important"><input type="text" id="customer_name" name="customername"/></td>
+      
+          <th style="border: 0 !important">Street Name:</th>
+          <td style="border: 0 !important"><input type="text" id="street_name" name="streetName"/></td>
+       
+          <th style="border: 0 !important">Location</th>
+          <td style="border: 0 !important"><input type="text" id="location" name="customeraddress"/></td>
+        
+          <th style="border: 0 !important">Phone:</th>
+          <td style="border: 0 !important"><input type="text" id="phone" name="customerphone"/></td>
+        
+          <th style="border: 0 !important">PAN:</th>
+          <td style="border: 0 !important"><input type="text" id="pan" name="pan" onchange="change()"/></td>
+        </tr>
+
+                </table>
+<table class="" id="items">
     <thead>
     <th>N</th>
     <th>Bike Model</th>
@@ -108,14 +139,13 @@
     <th>Price</th>
     <th>Discount</th>
     <th>Amount</th>
-    <th>
-            </th>
+   
         
         
         
         
     </thead>
-    <tbody class="body">
+    <tbody class="body" >
         <tr>
         <th class="no">1</th>
             <td>
@@ -134,6 +164,7 @@
         <input style="display:none;" type="text" name="chasis" class=" form-contol" value="{{ $rr->chasis_number }}" >
         <input style="display:none;" type="text" name="bike_model" class=" form-contol" value="{{ $rr->model }}" >
         <input style="display:none;" type="text" name="engine" class="form-contol" value="{{ $rr->engine_number }}" >
+        <input style="display:none;" type="text" name="tdate" class="form-contol" value="<?php echo date('Y-m-d'); ?>" >
           
              @endforeach
        
@@ -146,17 +177,39 @@
             <td>
         <input type="text" name="amount" class="amount form-contol">
         </td>
-            <td>
-   <a href="" class="btn btn-danger delete">Delete</a>
-   <a href="" class="btn btn-success">Edit</a>
-        </td>
+           
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;" > Subtotal Rs. </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;"> Discount. </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;"> Total Rs.  <b class="total" >0</b> </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="1" class="total-line" style="text-align:center;"> Amount Paid</td>
+        <td colspan="1" class="total-line" style="text-align:center;"> Rs.<input type="text" name="debit" class="getmoney form-control"/></td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="1" class="total-line" style="text-align:center;"> Due Amount  </td>
+        <td colspan="1" class="total-line" style="text-align:center;"> Rs. <input type="text" class="backmoney form-control"/> </td>
         </tr>
     </tbody>
     <tfoot>
-        <tr> <th colspan="7">Total <b class="total">0</b></th></tr>
-        <tr><th colspan="7">GetMoney <input type="text" class="getmoney form-control"/></th></tr>
+<!--
+        <tr> <th colspan="4">Total <b class="total" >0</b></th></tr>
+        <tr><th colspan="4">GetMoney <input type="text" name="debit" class="getmoney form-control"/></th></tr>
         <tr>
         <th colspan="7">BackMoney <input type="text" class="backmoney form-control"/></th></tr>
+        
+-->
         <th colspan="5"><input type="submit" value="Sell Bike " name="save" class="btn btn-primary" style="height:50px;width:250px;font-size: 35px;"/>
              <input type="submit" value="Print & Save" onclick="printval('printablearea')"  name="save" class="btn btn-success" style="float:right;height:50px;width:250px;font-size: 35px;"/>
            
@@ -167,23 +220,7 @@
    
 </form>
 
-    <div class="" id="printablearea">
-    Hello print
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-        <p>/************************************/</p><br/>
-    </div>
+    
     <script type="text/javascript">
         function printval(divname){
             var printcontents=document.getElementById(divname);

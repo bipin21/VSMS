@@ -1,8 +1,6 @@
 @extends('layouts.mast')
 @section('content')
- <link rel='stylesheet' type='text/css' href='print/style.css' />
-  <link rel='stylesheet' type='text/css' href='print/print.css' media="print" />
- 
+
         <!-- Page Content -->
         <div class="navbar-static-top" id="wrapper" style="top: 10%; overflow: hidden; position: fixed;">
             <div class="container-fluid">
@@ -27,7 +25,7 @@
                       <div class="title" style="position:fixed; width: 16%; z-index:1;">
                        <pre style="background:#09649a !important; color:white">     SEARCH    </pre>
                        </div>
-                      <div class="white-box" style="height:440px; padding: 15px 3px 3px 3px !important; z-index:0;">
+                      <div class="white-box" style=" padding: 15px 3px 3px 3px !important; z-index:0;">
 						
                         <style>
                       
@@ -112,20 +110,21 @@
 				 
                   </style>
                     <!--col -->
-					<form action="vatbill" method="post">
+				 <form method="POST" action="{{ url('/printbill') }}" accept-charset="UTF-8" enctype="multipart/form-data"><input name="" type="hidden" value="">
                     <div class="title" style="z-index:1; position:fixed; width:80%; height:30px; background:#09649a !important; color:white; top:19%" >
                      <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs" style="height:30px">
 					 <li class="nab"><a href="#" style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
-    min-height: 30px !important;"><i class="fa fa-floppy-o"> Save </i></a><li>
+    min-height: 30px !important;"><i class="fa fa-floppy-o"> Save </i></a></li>
 					 <li class="nab"><a href="#"  onclick='printDiv();' style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
     min-height: 30px !important;" ><i class="fa fa-print"> Print VAT Bill</i></a></li>
-					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
-    min-height: 30px !important;"><i class="fa fa-print"> Print Normal Bill</i></a></li>
+                     <input type="hidden" name="userid" value="{{Auth::user()->id}}"/>
+                      <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+					 <li class="nab"><button value="submit" style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;min-height: 30px !important;"><i class="fa fa-print"> Print Normal Bill</i></button></li>
 					 <li class="nab"><a href="#"  style="    vertical-align: middle;margin: -5px;height: 30px; padding: 8px; line-height: 30px !important;
     min-height: 30px !important;"><i class="fa fa-trash"> Delete </i></a></li>
 					 </ul>
                      </div>
-                        <div class="white-box" style=" height: 440px; padding:0 !important; margin-top: 40px;">
+                        <div class="white-box" style=" padding:0 !important; margin-top: 40px;">
                             <div class="col-in row">
                                <div class="col-md-12">
                                  <div class="tab" style="margin:0 !important;">
@@ -169,116 +168,237 @@ input{
 </style> -->
 
 <div id="printarea">
-<div id="page-wrap">
-
-    <textarea id="header">TAX INVOICE</textarea>
-    
-    <div id="identity">
-     <textarea id="address">Customer Name:
-Street Name
-Location
-Phone: </textarea>
-<div id="pan">
-<textarea>
-PAN: </textarea>
-</div>
- <div class="seller">
-<textarea id="logo">Seller's Name & Address:
-TVS SHOWROOM SINDHULI NEPAL
-PAN NO: 23749277
-Branch:Sindhuli  Phone:9843837438
-E-mail:tvs@hotmail.com </textarea>
-            </div>
-    
-    </div>
-    
-    <div style="clear:both"></div>
-    <div class="manual_date">
-      <textarea id="today_date">Date: December 15, 2017 </textarea>
-     </div>
-    <div id="customer">
-     <table id="meta">
-                <tr>
-                    <td class="meta-head">Invoice #</td>
-                    <td><textarea>000123</textarea></td>
-                </tr>
-                </table>
-    
-    </div>
-    
-    <table id="items">
-    
-      <tr>
-          <th>Item</th>
-          <th>Description</th>
-          <th>Unit Cost</th>
-          <th>Quantity</th>
-          <th>Price</th>
-      </tr>
-      
-      <tr class="item-row">
-          <td class="item-name"><div class="delete-wpr"><textarea>Web Updates</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
-          <td class="description"><textarea>Monthly web updates for http://widgetcorp.com (Nov. 1 - Nov. 30, 2009)</textarea></td>
-          <td><textarea class="cost">$650.00</textarea></td>
-          <td><textarea class="qty">1</textarea></td>
-          <td><span class="price">$650.00</span></td>
-      </tr>
-      
-      <tr class="item-row">
-          <td class="item-name"><div class="delete-wpr"><textarea>SSL Renewals</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
-
-          <td class="description"><textarea>Yearly renewals of SSL certificates on main domain and several subdomains</textarea></td>
-          <td><textarea class="cost">$75.00</textarea></td>
-          <td><textarea class="qty">3</textarea></td>
-          <td><span class="price">$225.00</span></td>
-      </tr>
-      
-      <tr id="hiderow">
-        <td colspan="5"><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
-      </tr>
-      
-      <tr>
-          <td colspan="2" class="blank"> </td>
-          <td colspan="2" class="total-line">Subtotal</td>
-          <td class="total-value"><div id="subtotal">$875.00</div></td>
-      </tr>
-      <tr>
-
-          <td colspan="2" class="blank"> </td>
-          <td colspan="2" class="total-line">Total</td>
-          <td class="total-value"><div id="total">$875.00</div></td>
-      </tr>
-      <tr>
-          <td colspan="2" class="blank"> </td>
-          <td colspan="2" class="total-line">Amount Paid</td>
-
-          <td class="total-value"><textarea id="paid">$0.00</textarea></td>
-      </tr>
-      <tr>
-          <td colspan="2" class="blank"> </td>
-          <td colspan="2" class="total-line balance">Balance Due</td>
-          <td class="total-value balance"><div class="due">$875.00</div></td>
-      </tr>
-    
-    </table>
-    
-    <div id="terms">
-      <h5>Terms</h5>
-      <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
-    </div>
-  
-  </div>
-</div>
-</div>
-</div>
-<script src="resources/js/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src='print/jquery.jqprint-0.3.js'></script>
-
-<script type='text/javascript' src='print/example.js'></script>
+<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 <script type="text/javascript">
-  function printDiv(){
-    //alert("clicked");
-     $('#printarea').jqprint();
-  }
+    function totalamount(){
+        var t=0;
+        $('.amount').each(function(i,e){
+           var amt=$(this).val()-0;
+            t +=amt;
+        });
+        $('.total').html(t);
+    }
+    $(function(){
+        $('.getmoney').change(function(){
+           var total=$('.total').html();
+            var getmoney=$(this).val();
+            var t=getmoney-total;
+            $('.backmoney').val(t).toFixed(2);
+        });
+       $('.add').click(function(){
+           var product=$('.product_id').html();
+           var n=($('.body tr').length-0)+1;
+           var tr='<tr><th class="no">'+n+'</th>'+
+    '<td><select name="product_id" class="form-control product_id">'+product+'</select></td>'+
+        ' @foreach($data as $rr)<input style="display:none;" type="text" name="reg_no" class="qty form-contol" value="{{ $rr->reg_no }}" ><input style="display:none;" type="text" name="chasis" class="qty form-contol" value="{{ $rr->chasis_number }}" >        <input style="display:none;" type="text" name="bike_model" class="qty form-contol" value="{{ $rr->model }}" >        <input style="display:none;" type="text" name="engine" class="qty form-contol" value="{{ $rr->engine_number }}" >@endforeach'+
+            '<td><input type="text" name="price" class="price form-contol"></td>'+
+            '<td><input type="text" name="dis" class="dis form-contol"></td>'+
+            '<td><input type="text" name="amount" class="amount form-contol"></td>'+
+            '<td><a href="" class="btn btn-danger delete">Delete</a><a href="" class="btn btn-success">Edit</a></td></tr>';
+   $('.body').append(tr);
+       });
+        $('.body').delegate('.delete','click',function(){
+            $(this).parent().parent().remove();
+            totalamount()
+        });
+         $('.body').delegate('.product_id','change',function(){
+            var tr= $(this).parent().parent();
+             var unitprice = tr.find('.product_id option:selected').attr('data-price');
+//             alert(unitprice);
+             tr.find('.price').val(unitprice);
+             
+              var tr=$(this).parent().parent();
+             var reg=tr.find('.reg').val()-0;
+             var dis=tr.find('.dis').val()-0;
+             var price=tr.find('.price').val()-0;
+             var total=(price) - ((price * dis)/100);
+             tr.find('.amount').val(total);
+             totalamount()
+        });
+         $('.body').delegate('.qty,.dis','keyup',function(){
+             var tr=$(this).parent().parent();
+             
+             var dis=tr.find('.dis').val()-0;
+             var price=tr.find('.price').val()-0;
+             var total=(price) - (( price * dis)/100);
+             tr.find('.amount').val(total);
+             totalamount()
+        });
+        
+    });
 </script>
+
+<div class="col-md-12" style="background:#fff;">
+<form  action="{{action('BillController@testsave')}}" method="post">
+    <input type="hidden" name="_token" value="{{ csrf_token()}}" />
+<!--
+<table class="table">
+    <tr>
+        <td>Order Name</td><td><input type="text" class="form-control" name="ordername" required/></td>
+    </tr>
+        <tr>
+          <td>Customer Name</td><td><input type="text" class="form-control" name="customername" required/></td>
+    </tr>
+    <tr>
+          <td>Customer Address</td><td><input type="text" class="form-control" name="customeraddress" required/></td>
+    </tr>
+    <tr>
+          <td>Custom Phone</td><td><input type="text" class="form-control" name="customerphone" required/></td>
+    </tr>
+</table>
+-->
+<table >
+        <tr >
+          <tr>
+          <th class="meta-head"  style="border: 0 !important">Invoice #</th>
+              @foreach($oid as $od)
+              <p style="display:none;"><?php  $ood =$od->ordername;
+                 
+                  ?></p>
+          <td style="border: 0 !important" ><input type="text" value="{{ $ood+1  }}" name="ordername"/></td>
+              @endforeach
+          </tr>
+          <tr>
+          
+          <th style="border: 0 !important" >Date:</th>
+              <td style="border: 0 !important"><span id="">{{ new Date()}} </span></td><br/>
+
+          </tr>
+          <tr>
+          <th style="border: 0 !important">Customer Name:</th>
+          <td style="border: 0 !important"><input type="text" id="customer_name" name="customername"/></td>
+      
+          <th style="border: 0 !important">Street Name:</th>
+          <td style="border: 0 !important"><input type="text" id="street_name" name="streetName"/></td>
+       
+          <th style="border: 0 !important">Location</th>
+          <td style="border: 0 !important"><input type="text" id="location" name="customeraddress"/></td>
+        
+          <th style="border: 0 !important">Phone:</th>
+          <td style="border: 0 !important"><input type="text" id="phone" name="customerphone"/></td>
+        
+          <th style="border: 0 !important">PAN:</th>
+          <td style="border: 0 !important"><input type="text" id="pan" name="pan" onchange="change()"/></td>
+        </tr>
+
+                </table>
+<table class="" id="items">
+    <thead>
+    <th>N</th>
+    <th>Bike Model</th>
+    
+    <th>Price</th>
+    <th>Discount</th>
+    <th>Amount</th>
+   
+        
+        
+        
+        
+    </thead>
+    <tbody class="body" >
+        <tr>
+        <th class="no">1</th>
+            <td>
+            <select name="product_id" class="form-control product_id" style="height: 40px;">
+                <option>select</option>
+                @foreach($data as $r)
+                <option data-price="{{ $r->price }}" value="{{ $s = $r->id }}">
+                {{ $r->model}}</option>
+                @endforeach
+                </select>
+            </td>
+        
+            @foreach($data as $rr)
+            
+        <input style="display:none;" type="text" name="reg_no" class="qty form-contol" value="{{ $rr->reg_no }}" >
+        <input style="display:none;" type="text" name="chasis" class=" form-contol" value="{{ $rr->chasis_number }}" >
+        <input style="display:none;" type="text" name="bike_model" class=" form-contol" value="{{ $rr->model }}" >
+        <input style="display:none;" type="text" name="engine" class="form-contol" value="{{ $rr->engine_number }}" >
+        <input style="display:none;" type="text" name="tdate" class="form-contol" value="<?php echo date('Y-m-d'); ?>" >
+          
+             @endforeach
+       
+            <td>
+        <input type="text" name="price" class="price form-contol">
+        </td>
+            <td>
+        <input type="text" name="dis" class="dis form-contol">
+        </td>
+            <td>
+        <input type="text" name="amount" class="amount form-contol">
+        </td>
+           
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;height: 40px;" > Subtotal Rs. </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;height: 40px;"> Discount. </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center;height: 40px;"> Total Rs.  <b class="total" >0</b> </td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center; "> Amount Paid  Rs.<input type="text" name="debit" class="getmoney form-control" style=" width: 60% !important;
+    height:40px !important; display:inline-block;"/></td>
+        </tr>
+        <tr>
+        <td colspan="3" class="blank" ></td>
+        <td colspan="2" class="total-line" style="text-align:center; "> Due Amount  Rs. <input type="text" class="backmoney form-control" style=" width: 60% !important;
+    height:40px !important; display:inline-block;" /> </td>
+        </tr>
+    </tbody>
+    <tfoot>
+<!--
+        <tr> <th colspan="4">Total <b class="total" >0</b></th></tr>
+        <tr><th colspan="4">GetMoney <input type="text" name="debit" class="getmoney form-control"/></th></tr>
+        <tr>
+        <th colspan="7">BackMoney <input type="text" class="backmoney form-control"/></th></tr>
+        
+-->
+        <th colspan="5"><input type="submit" value="Sell Bike " name="save" class="btn btn-primary" style="height:50px;width:250px;font-size: 35px;"/>
+             <input type="submit" value="Print & Save" onclick="printval('printablearea')"  name="save" class="btn btn-success" style="float:right;height:50px;width:250px;font-size: 35px;"/>
+           
+        </th>
+    </tfoot>
+</table>
+
+   
+</form>
+
+    
+    <script type="text/javascript">
+        function printval(divname){
+            var printcontents=document.getElementById(divname);
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = originalContents;
+            window.print();
+        }
+    </script> 
+    </div>
+
+								
+								
+                                        
+</div>
+</div>
 @endsection
+<script src="resources/js/jquery-2.2.4.min.js"></script>
+<script>
+  var pan
+  function change(){
+    pan= $("#pan").val();
+    if(pan){
+      $("#show").show();
+    }else{
+      $("#show").hide();
+    }
+
+  };
+
+  </script>

@@ -31,7 +31,8 @@ class StaffController extends Controller
     {
         if(Auth::user()){
             $data=DB::select('select * from staff');
-        return view('staff.index',array('user'=>Auth::user(),'data'=>$data));
+            $data1=DB::select('select * from attendences');
+        return view('staff.index',array('user'=>Auth::user(),'data'=>$data,'data1'=>$data1));
              }
         else{
             return redirect()->back();

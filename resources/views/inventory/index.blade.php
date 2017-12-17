@@ -23,6 +23,7 @@
     <div class="box container box-success"><br>
      
         <a href="home" class="btn btn-success">Back to Dashboard</a><br><br>
+        {{$tdt}}
           <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>

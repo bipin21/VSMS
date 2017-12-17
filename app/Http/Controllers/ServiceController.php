@@ -42,6 +42,17 @@ class ServiceController extends Controller
             return redirect()->back();
         }
     }
+    public function serv()
+    {
+        if(Auth::user()){
+        $b=DB::select('select * from bikes');
+            $s=DB::select('select * from services order by bike_model');
+        return view('service.create',array('user'=>Auth::user(),'b'=>$b,'s'=>$s));
+             }
+        else{
+            return redirect()->back();
+        }
+    }
      public function addbikeservice(Request $request){
         if(Auth::user()){
             $br=new Service();
@@ -59,6 +70,25 @@ class ServiceController extends Controller
         else{
             return redirect()->back();
         } 
+    }
+    public function saveservice(Request $request){
+        if(Auth::user()){
+         $data=$request->all();
+            for($i=0;$i<count($data['service_id']);$i++){
+                $servdetail=array(
+                'name'=>$data['service_id'][$i],
+                'type'=>$data['servicetype'][$i],
+                'timeinterval'=>$data['timedays'][$i],
+                'message'=>$data['message'][$i],
+                'bike_model'=>$data['bikemodel']
+                );
+                DB::table('services')->insert($servdetail);
+            }
+        return redirect()->back();
+             }
+        else{
+            return redirect()->back();
+        }  
     }
    
   

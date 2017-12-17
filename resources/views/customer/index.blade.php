@@ -33,6 +33,7 @@
                   <th>Bike_model</th>
                   <th>Reg_no</th>
                   <th>Price</th>
+                  <th>Created At</th>
                   
                  
                   <th>Action</th>
@@ -48,6 +49,7 @@
                     <td>{{$da->bike_model}}</td>
                     <td>{{$da->reg_no}}</td>
                     <td>{{$da->price}}</td>
+                    <td>{{$da->created_at}}</td>
                     <td>
                         <a  href="{{route('customers.edit',$da->id)}}">
                       <button class="btn btn-primary">View Details</button>

@@ -48,7 +48,20 @@
                     <td>{{$d->address}}</td>
                     <td>{{$d->phone}}</td>
                     <td>{{$d->sdate}}</td>
-                    <td>{{$d->attendence}}</td>
+                    <td>
+                        <?php 
+                        $cn=0;
+                        foreach($data1 as $d1){
+                          if($d->id==$d1->staff_id){
+                              
+                          
+                            
+                        $cn++;
+                          }
+                        }
+                        echo $cn;
+                        ?>
+                        </td>
                     <td><i class="fa fa-edit"></i><i class="fa fa-trash"></i></td>
                         </tr>
                     @endforeach

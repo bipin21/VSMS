@@ -23,9 +23,37 @@
     <div class="box container box-success"><br>
      
       
-                <div class="" > 
+                <div class="col-md-3" > 
                       <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#bikemodal" style="    width: 150px;height: 30px;font-size: 15px; padding:3px 0px 0px 0px; ">Add New Bike Parts</button>
                 </div>
+        <div class="col-md-9">
+            @if ($message = Session::get('success'))
+					<div class="alert alert-success" role="alert">
+						{{ Session::get('success') }}
+					</div>
+				@endif
+
+				@if ($message = Session::get('error'))
+					<div class="alert alert-danger" role="alert">
+						{{ Session::get('error') }}
+					</div>
+				@endif
+
+				<h3>Import File Directly:</h3>
+				<form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;" action="{{ URL::to('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+					<input type="file" name="import_file" style="margin: 0;    display: inline-block;
+    margin-top: -12px;
+    padding: 0;
+    height: 20px;" />
+					{{ csrf_field() }}
+					
+
+					<button class="btn btn-primary" style="    display: inline-block;">Import CSV or Excel File</button>
+
+				</form>
+				<br/>
+        </div>
                 
 <!--            modal-->
             <div class="modal fade" id="bikemodal" role="dialog">
@@ -114,9 +142,12 @@
                     </div>
                     </div>
                 </div>
+                
             </div>
        
           <div class="box-body">
+             	
+               
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -132,8 +163,27 @@
                 <tbody>
                     @foreach($b as $bk)
                     <tr>
-                    <td>{{ $bk-> bike_model }}</td>
-                    <td>{{ $bk->color}}</td>
+                    <td> <?php if(($bk->bike_model)== null){ ?> <?php 
+                        
+                        echo "Not defined";
+}
+                        else
+                        {
+                        echo $bk->bike_model;   
+                        }
+                        
+                    ?></td>
+                    <td>
+                        <?php if(($bk->color)== null){ ?> <?php 
+                        
+                        echo "Not defined";
+}
+                        else
+                        {
+                        echo $bk->color;   
+                        }
+                        
+                    ?></td>
                     <td>{{$bk->datetaken}}</td>
                     <td>{{$bk->parts_no}}</td>
                     <td>{{$bk->parts_name}}</td>
