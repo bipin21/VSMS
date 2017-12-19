@@ -83,7 +83,7 @@
 </script>
 
 <div class="col-md-12">
-<form  action="{{action('BillController@testsave')}}" method="post">
+<form  action="{{action('BillController@bikesellsave')}}" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token()}}" />
 <!--
 <table class="table">

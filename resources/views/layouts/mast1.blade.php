@@ -51,25 +51,10 @@
                     <li>
                         <a href="../../home" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
-                    <li>
-                        <!--                        <a href="" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">Purchase</span></a>-->
-                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Purchase
-                             <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="../../purchase">Bike</a></li>
-                                  <li><a href="../../purchaseparts">Parts</a></li>
-          
-                                </ul>
-                    </li>
+                   
                     <li>
 <!--                        <a href="inventory" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Inventory</span></a>-->
-                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Inventory
-                             <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="../../inventory">Bike</a></li>
-                                  <li><a href="../../inventoryparts">Parts</a></li>
-          
-                                </ul>
+                            <a href="../../inventory" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Inventory</span></a>
                     </li>
                     <li>
 <!--                        <a href="sale" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i><span class="hide-menu">Sales</span></a>-->

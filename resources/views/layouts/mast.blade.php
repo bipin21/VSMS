@@ -99,8 +99,9 @@
                                 </ul>
                     </li>
                      <li>
-<!--                        <a href="sale" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i><span class="hide-menu">Sales</span></a>-->
-                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bill
+                        <a href="bikebill" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i><span class="hide-menu">Create Bill</span></a>
+<!--
+                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Create Bill
                              <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                   <li><a href="bikebill">Bike</a></li>
@@ -110,6 +111,7 @@
                                   <li><a href="demobill">Demo Bill</a></li>
 
                                 </ul>
+-->
                     </li>
 					<li>
                         <a href="customer" class="waves-effect"><i class="fa fa-font fa-pie-chart" aria-hidden="true"></i><span class="hide-menu">Customer</span></a>

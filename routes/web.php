@@ -72,22 +72,22 @@ Route::post('saveservice', 'ServiceController@saveservice');
 
 Route::post('/service',['uses'=>'ServiceController@addbikeservice','as'=>'bikeservice.add']);
 
-Route::get('/inventoryt', 'InventoryController@indext')->name('inventory');
-Route::get('/inventory', 'InventoryController@indext')->name('inventory');
-Route::get('/inventoryparts', 'InventoryController@parts')->name('inventory');
+Route::get('/inventory', 'InventoryController@index')->name('inventory');
+//Route::get('/inventory', 'InventoryController@indext')->name('inventory');
+//Route::get('/inventoryparts', 'InventoryController@parts')->name('inventory');
 Route::post('importExcelPart', 'PurchaseController@saveparts');
 Route::post('importExcelBike', 'PurchaseController@savebikes');
 
 // Bill and Sales Management
-Route::get('/demobill', 'BillController@demo');
+//Route::get('/demobill', 'BillController@demo');
 Route::get('/bikebill', 'BillController@bike');
-Route::get('/vatbill', 'BillController@vat');
-Route::get('/partsbill', 'BillController@parts');
-Route::post('partssave', 'BillController@partssave');
+//Route::get('/vatbill', 'BillController@vat');
+//Route::get('/partsbill', 'BillController@parts');
+//Route::post('partssave', 'BillController@partssave');
 Route::post('partsbillsave', 'BillController@partsbillsave');
 
-Route::get('/testbill', 'BillController@test');
-Route::post('/testbill', 'BillController@testsave');
+//Route::get('/testbill', 'BillController@test');
+Route::post('bikesellsave', 'BillController@bikesellsave');
 
 
 

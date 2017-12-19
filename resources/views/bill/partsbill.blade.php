@@ -123,18 +123,18 @@
             <select name="product_id[]" class="form-control product_id">
                 <option>select</option>
                 @foreach($data as $r)
-                <option data-price="{{ $r->price }}" value="{{  $r->id }}">
+                <option data-price="{{ $r->price }}" value="{{ $sd=$r->id }}">
                 {{ $r->parts_name }}</option>
                 @endforeach
                 </select>
             </td>
         <td>
             @foreach($data as $rr)
-            <div style="display:none;">{{$s1=$rr->id}}</div>
-           
+            
+           @if($sd == $rr->id)
         <input style="display:none;" type="text" name="reg_no[]" class="qty form-contol" value="{{ $rr->parts_no }}" >
         <input style="display:none;" type="text" name="parts_name[]" class="qty form-contol" value="{{ $rr->parts_name }}" >
-         
+         @endif
              @endforeach
         </td>
             <td>
