@@ -393,33 +393,7 @@ input{
 </div>
 </div>
                                            <div class="tab-pane fade in " id="profile_else">
-                                 <!--    <table border=1>
-<tr>
-<td>
-<style>
-.customer th, td, .transaction th, td, .addItem th, td{
-	font-size:11px;
-	text-align:left;
-
-}
-.customer{
-	margin: 1px 0 0 1px;
-}
-.transaction{
-	margin:-96px 1px 0 500px;
-}
-table{
-	border-spacing:0;
-}
-table .addItem{
-	width:100%;
-}
-input{
-	line-height: 0;
-}
-
-</style> -->
-
+                        
 <div id="printarea">
 
 <script type="text/javascript">
@@ -452,6 +426,7 @@ input{
            var tr1='<tr><th class="no1">'+n1+'</th>'+
     '<td><select name="product_id1[]" class="form-control product_id1" style="height: 40px;">'+product1+'</select></td>'+
             '<td><input type="text" name="price1[]" class="price1 form-contol"></td>'+
+               '<td><input type="number" name="qty1[]" class="qty1 form-contol"></td>'+
             '<td><input type="number" name="dis1[]" class="dis1 form-contol"></td>'+
             '<td><input type="text" name="amount1[]" class="amount1 form-contol"></td></tr>';
    $('.body1').append(tr1);
@@ -464,14 +439,18 @@ input{
             var tr1= $(this).parent().parent();
              var unitprice1 = tr1.find('.product_id1 option:selected').attr('data-price1');
 //             alert(unitprice);
+              tr1.find('.qty1').val(1);
              tr1.find('.price1').val(unitprice1);
              
               var tr1=$(this).parent().parent();
              var reg1=tr1.find('.reg1').val()-0;
+             var reg1=tr1.find('.reg1').val()-0;
              var dis1=tr1.find('.dis1').val()-0;
+             var q1=tr1.find('.qty1').val()-0;
              var price1=tr1.find('.price1').val()-0;
-             var total1=(price1) - ((price1 * dis1)/100);
+             var total1=(price1*q1) - ((price1 * dis1*q1)/100);
              tr1.find('.amount1').val(total1);
+            
              totalamount1()
         });
          $('.body1').delegate('.qty1,.dis1','keyup',function(){
@@ -479,7 +458,8 @@ input{
              
              var dis1=tr1.find('.dis1').val()-0;
              var price1=tr1.find('.price1').val()-0;
-             var total1=(price1) - (( price1 * dis1)/100);
+             var q1=tr1.find('.qty1').val()-0;
+             var total1=(price1*q1) - (( price1 * dis1*q1)/100);
              tr1.find('.amount1').val(total1);
              totalamount1()
         });
@@ -532,6 +512,7 @@ input{
     <th>Parts Name</th>
     
     <th>Price</th>
+    <th>Qunatity</th>
     <th>Discount</th>
     <th>Amount</th>
    
@@ -568,6 +549,9 @@ input{
         <input type="text" name="price1[]" class="price1 form-contol">
         </td>
             <td>
+        <input type="number" name="qty1[]" class="qty1 form-contol">
+        </td>
+            <td>
         <input type="text" name="dis1[]" class="dis1 form-contol">
         </td>
             <td>
@@ -579,7 +563,7 @@ input{
          </tbody>
     <tfoot>
         <tr>
-        <td colspan="5"><input type="button" class="btn btn-primary add1" value="Add Row +" /></td>
+        <td colspan="6"><input type="button" class="btn btn-primary add1" value="Add Row +" /></td>
             
         </tr>
 <!--
@@ -588,37 +572,31 @@ input{
       </tr>
 -->
         <tr>
-        <td colspan="3" class="blank" ></td>
+        <td colspan="4" class="blank" ></td>
         <td colspan="2" class="total-line" style="text-align:center;height: 40px;" > Subtotal Rs. <b class="subtotal" >0</b> </td>
         </tr>
         <tr>
-        <td colspan="3" class="blank" ></td>
+        <td colspan="4" class="blank" ></td>
         <td colspan="2" class="total-line" style="text-align:center;height: 40px;"> Discount. <input type="text" name="totaldis1" class="totaldis form-control" style=" width: 60% !important;
     height:40px !important; display:inline-block;"/></td>
         </tr>
         <tr>
-        <td colspan="3" class="blank" ></td>
+        <td colspan="4" class="blank" ></td>
         <td colspan="2" class="total-line" style="text-align:center;height: 40px;"> Total Rs.  <b class="total1" >0</b> </td>
         </tr>
         <tr>
-        <td colspan="3" class="blank" ></td>
+        <td colspan="4" class="blank" ></td>
         <td colspan="2" class="total-line" style="text-align:center; "> Amount Paid  Rs.<input type="text" name="debit1" class="getmoney1 form-control" style=" width: 60% !important;
     height:40px !important; display:inline-block;"/></td>
         </tr>
         <tr>
-        <td colspan="3" class="blank" ></td>
+        <td colspan="4" class="blank" ></td>
         <td colspan="2" class="total-line" style="text-align:center; "> Due Amount  Rs. <input type="text" class="backmon form-control" style=" width: 60% !important;
     height:40px !important; display:inline-block;" /> </td>
         </tr>
    
-<!--
-        <tr> <th colspan="4">Total <b class="total" >0</b></th></tr>
-        <tr><th colspan="4">GetMoney <input type="text" name="debit" class="getmoney form-control"/></th></tr>
-        <tr>
-        <th colspan="7">BackMoney <input type="text" class="backmoney form-control"/></th></tr>
-        
--->
-        <th colspan="5"><input type="submit" value="Sell Bike " name="save" class="btn btn-primary" style="height:50px;width:250px;font-size: 35px;"/>
+
+        <th colspan="6"><input type="submit" value="Sell Bike " name="save" class="btn btn-primary" style="height:50px;width:250px;font-size: 35px;"/>
              <input type="submit" value="Print & Save" onclick="printval('printablearea')"  name="save" class="btn btn-success" style="float:right;height:50px;width:250px;font-size: 35px;"/>
            
         </th>

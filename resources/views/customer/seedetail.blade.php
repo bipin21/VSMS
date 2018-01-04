@@ -35,6 +35,7 @@
                       <button class="btn btn-primary">View  Ledger Details</button>
                       </a>&nbsp;&nbsp;
               <a  href="{{route('customerparts.edit',$d->id)}}">
+             
                       <button class="btn btn-primary">Add new Parts</button>
                       </a>&nbsp;&nbsp;
           <h2 style="text-align:center;color:green;">*** Bike Service History ***</h2>

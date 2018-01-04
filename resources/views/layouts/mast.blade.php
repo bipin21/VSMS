@@ -307,8 +307,10 @@
 
 
 
+    
 
 
-
+   <footer class="footer-bottom text-center" style="background: #09649a;color: #fff;    position: fixed;width: 100%;"> 2018 &copy; VSMS- Stock Management System by Valiant Tech Pvt. Ltd. </footer>
+    
 </body>
 </html>

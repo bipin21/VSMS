@@ -14,23 +14,14 @@ use Excel;
 use Carbon\Carbon;
 class PurchaseController extends Controller
 {
-    //
-     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    
     public function __construct()
     {
         $this->middleware('auth');
 //        $this->middleware('guest', ['except' => 'logout']);
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         if(Auth::user()){
@@ -56,9 +47,11 @@ class PurchaseController extends Controller
             $br=new Bike();
             $br->model=Input::get('model_name');
             $br->color=Input::get('color');
+            $br->units=Input::get('quantity');
             $br->engine_number=Input::get('engine');
             $br->chasis_number=Input::get('chasis');
             $br->reg_no=Input::get('reg_no');
+            $br->purchaseprice=Input::get('purchaseprice');
             $br->price=Input::get('unitprice');
             
             $br->datetaken=Input::get('datetaken');
@@ -76,8 +69,10 @@ class PurchaseController extends Controller
             $br->parts_no=Input::get('partsno');
             $br->parts_name=Input::get('partsname');
             $br->color=Input::get('color');
+            $br->units=Input::get('quantity');
             $br->bike_model=Input::get('model_name');
             
+            $br->purchaseprice=Input::get('purchaseprice');
             $br->price=Input::get('unitprice');
           
             $br->datetaken=Input::get('datetaken');
@@ -100,13 +95,16 @@ class PurchaseController extends Controller
 			$data = Excel::load($path, function($reader) {})->get();
              $cdate=Carbon::now();
 
+
 			if(!empty($data) && $data->count()){
 
 				foreach ($data->toArray() as $key => $value) {
 					if(!empty($value)){
                                                 
-						foreach ($value as $v) {		
-							$insert[] = ['model' => $v['model'], 'color' => $v['color'],'engine_number' => $v['engine_number'],'chasis_number' => $v['chasis_number'],'reg_no' => $v['reg_no'],'price' => $v['price'],'datetaken' =>$cdate,'status'=>0];
+						foreach ($value as $v) {	
+//                                                          $insert[] = ['model' => $v['BIKE MODEL NAME'], 'color' => $v['COLOUR'],'engine_number' => $v['ENGINE NO'],'chasis_number' => $v['chasis_number'],'reg_no' => $v['reg_no'],'price' => $v['price'],'datetaken' =>$cdate,'status'=>0];
+//                                                          
+							$insert[] = ['color' => $v['colour'],'model' => $v['bike_model_name'],'engine_number' => $v['engine_no'],'chasis_number' => $v['chasis_no'],'reg_no' => $v['reg_no'],'purchaseprice' => $v['purchase_rate'],'price' => $v['sales_rate'],'datetaken' =>$v['date'],'units' =>$v['qty'],'status'=>0];
 						}
 					}
 				}
@@ -139,8 +137,9 @@ class PurchaseController extends Controller
 
 				foreach ($data->toArray() as $key => $value) {
 					if(!empty($value)){
-						foreach ($value as $v) {		
-							$insert[] = ['parts_no' => $v['parts_no'], 'parts_name' => $v['parts_name'],'price' => $v['price'],'status'=>0];
+						foreach ($value as $v) {	
+//                                                          date	PART_NAME	PART_CODE	model	QTY	SALE_PRICE	PURCHASE_PRICE
+$insert[] = ['parts_no' => $v['parts_no'], 'parts_name' => $v['parts_name'],'bike_model' => $v['model'],'units' => $v['qty'],'purchaseprice' => $v['purchase_price'],'price' => $v['sale_price'],'datetaken' => $v['date'],'status'=>0];
 						}
 					}
 				}

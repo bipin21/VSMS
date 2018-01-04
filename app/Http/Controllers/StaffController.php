@@ -66,6 +66,47 @@ class StaffController extends Controller
             return redirect()->back();
         }
     }
+    public function edit($id){
+         if(Auth::user()){
+        $editid=Staff::find($id);
+        return view('staff.edit',compact('editid'),array('user'=>Auth::user()));
+              }
+        else{
+            return redirect()->back();
+        }
+    }
+     public function update(Request $request,$id){
+        
+         if(Auth::user()){
+           $post=$request->all();
+             
+             $data=array(
+                 'name'=>$post['sname'],
+                 'address'=>$post['saddress'],
+                 'phone'=>$post['sphone'],
+                 'sdate'=>$post['sdate'],
+                 'stype'=>$post['stype'],
+                 'spost'=>$post['spost']
+                        );
+         $ct= Staff::find($post['editid']);
+             $ct->update($data);
+//        Staff::find($id)->update($request->all());
+            
+        return redirect()->back();
+             }
+        else{
+            return redirect()->back();
+        }
+    }
+     public function destroy($id){
+         if(Auth::user()){
+        Staff::find($id)->delete();
+        return redirect()->back();
+              }
+        else{
+            return redirect()->back();
+        }
+    }
     
    
   

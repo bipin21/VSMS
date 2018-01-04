@@ -50,17 +50,23 @@ Route::get('/saleparts', 'SaleController@parts')->name('sale');
 Route::get('/staff', 'StaffController@index')->name('staff');
 Route::get('/addstaff', 'StaffController@add')->name('staff');
 Route::post('/addstaff', ['uses'=>'StaffController@create','as'=>'staff.add']);
+Route::resource('staff','StaffController');
 
 
 Route::get('/customer', 'CustomerController@index')->name('customer');
 Route::post('/customer', 'CustomerController@customerservicesave')->name('customer');
 Route::post('/customer', ['uses'=>'CustomerController@update','as'=>'customersupdate.update']);
 
+
 Route::resource('customers','CustomerController');
 Route::resource('customerparts','CustomerPartController');
 //Route::resource('customersupdate','CustomerController');
 
+Route::resource('inventorybikeupdate','BikeController');
+Route::resource('inventorybikepartupdate','InventoryController');
+
 Route::get('/report', 'HomeController@report');
+Route::post('/report', ['uses'=>'HomeController@updatereport','as'=>'report.update']);
 //ledger 
 Route::get('/ledger', 'LedgerController@index');
 Route::post('/ledger', ['uses'=>'LedgerController@addledger','as'=>'ledger.add']);

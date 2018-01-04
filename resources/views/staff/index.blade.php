@@ -62,8 +62,12 @@
                         echo $cn;
                         ?>
                         </td>
-                    <td><i class="fa fa-edit"></i><i class="fa fa-trash"></i></td>
-                        </tr>
+                    <td><a  href="{{route('staff.edit',$d->id)}}">Edit</a>
+                        <a> 
+                            {!! Form::open(['method'=>'DELETE', 'route'=>['staff.destroy',$d->id],'style'=>'display:inline-block']) !!}
+                            {!! Form::submit('DELETE',['class'=>'btn btn-danger']) !!}
+                            {!! Form::close() !!}
+                            </a> </tr>
                     @endforeach
                     
                     
@@ -86,7 +90,6 @@
 		
 
 
-<footer class="footer text-center"> 2018 &copy; VSMS- Stock Management System by Valiant Tech Pvt. Ltd. </footer>
-           
+          
 </div>
 @endsection

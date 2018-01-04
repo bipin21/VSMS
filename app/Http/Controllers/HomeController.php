@@ -41,10 +41,16 @@ class HomeController extends Controller
 //            }
 
              $adate=date('Y-m-d');
+ $b=DB::select('SELECT * FROM `bikes` where status=0 ');
+           
+            $orderid=DB::select('SELECT ordername FROM orders order by id desc limit 1 ');
+            $orderid1=DB::select('SELECT ordername FROM ordersparts order by id desc limit 1 ');
+              $qparts=DB::select('SELECT * FROM parts where status=0 ');
 
+         
 
             $at=DB::select('select * from attendences where adate="'.$adate.'"');
-        return view('stockdashboard',array('user'=>Auth::user(),'sids'=>$sid,'pr'=>$prd,'att'=>$at,'ddate'=>$servd,'cdate'=>$cdate,'customer'=>$customer));
+        return view('stockdashboard',array('user'=>Auth::user(),'sids'=>$sid,'pr'=>$prd,'att'=>$at,'ddate'=>$servd,'cdate'=>$cdate,'customer'=>$customer,'data'=>$b,'dataparts'=>$qparts,'oid'=>$orderid,'oid1'=>$orderid1));
         }
         else{
             return redirect()->back();
@@ -77,6 +83,66 @@ class HomeController extends Controller
            $now = Carbon::now();
 
         $result =DB::table('bikes')->whereYear('created_at',$now->year)->whereMonth('created_at',$now->month)->whereDay('created_at',$now->day)->count();
+
+
+            $biked=DB::table('bikes')->count();
+
+//Donut chart
+              $partd=DB::table('parts')->count();
+          $chart= Charts::create('donut', 'highcharts')
+                ->title('Purchase chart')
+                ->labels(['Bike', 'Part'])
+                ->values([$result,$partd])
+                ->dimensions(400,300)
+                ->responsive(false);
+
+
+                // Area charts
+                $saled=Charts::multi('areaspline', 'highcharts')
+    ->title('Sales & Purchase chart')
+    ->colors(['#ff0000', '#ffffff'])
+    ->labels(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday', 'Sunday'])
+    ->dataset('Sales', [3, 4, 3, 5, 4, 10, 12])
+    ->dataset('Purchase',  [1, 3, 4, 3, 3, 5, 4]);
+             
+             //line charts
+             $custcount =DB::table('customers')->whereYear('created_at',$now->year)->whereMonth('created_at',$now->month)->whereDay('created_at',$now->day)->count();
+              $custcountyear =DB::table('customers')->whereYear('created_at',$now->year)->count();
+              $custcountmonth =DB::table('customers')->whereYear('created_at',$now->year)->whereMonth('created_at',$now->month)->count();
+             $linechart=Charts::create('line', 'highcharts')
+    ->title('Customer chart')
+    ->elementLabel('Active Customers')
+    ->labels(['Today','Last Month','Last Year'])
+    ->values([$custcount,$custcountmonth,$custcountyear])
+    ->dimensions(600,400)
+    ->responsive(false);
+//bar charts
+             
+             $barchart=Charts::create('bar', 'highcharts')
+    ->title('Sales chart')
+    ->elementLabel('sales items label')
+    ->labels(['First', 'Second', 'Third'])
+    ->values([5,10,20])
+    ->dimensions(600,400)
+    ->responsive(false);
+             
+             
+        return view('report',array('user'=>Auth::user(),'chart'=>$chart,'areachart'=>$saled,'linechart'=>$linechart,'barchart'=> $barchart ));
+
+             }
+        else{
+            return redirect('stocklogin');
+        }
+    }
+     public function updatereport(Request $request)
+    {
+         if(Auth::user()){
+             $post=$request->all();
+             $stdate=$post['startdate'];
+             $endate=$post['enddate'];
+           $now = Carbon::now();
+
+        $result =DB::table('bikes')->whereBetween('created_at', [$stdate, $endate])->count();
 
 
             $biked=DB::table('bikes')->count();

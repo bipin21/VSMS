@@ -19,8 +19,45 @@
                 <!-- row -->
 
         	<div class="row">
+              
+                  <div class="col-md-12" style="margin-bottom:20px;">
+                      <form action="{{route('report.update')}}" method="post" enctype="multipart/form-data">
+                          <div class="col-md-2">
+                        
+                    </div>
+                    <div class="col-md-1">
+                        <label style="padding:10px;"> Start Date</label>
+                    </div>
+                  <div class="col-md-3">
+                    <input type="date" name="startdate" class="form form-control"/>    
+                    </div>
+            
+            
+             <div class="col-md-1">
+                        <label style="padding:10px;"> End Date</label>
+                    </div>
+                          
+                  <div class="col-md-3">
+                    <input type="date" name="enddate" class="form form-control"/>    
+                    </div>
+                 
+                          <div class="col-md-12" style="text-align:center;">
+                         <input type="hidden" name="_token" value="{{ csrf_token()}}" />
+                        <input type="submit" value="See your Report" name="save" class="btn btn-success"/>
+                                                     
+                    </div>
+                      
+                                                 </form>
+                    
+                      </div>
+                  
+                  
+                                                
+                                                     
 
-					<div class="col-md-6" style="margin-top:11%">
+					<div class="col-md-6" style="margin-top:2%;">
+                                                 
+                                                
           <!-- AREA CHART -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -64,7 +101,7 @@ $areachart->render()
 
         </div>
         <!-- /.col (LEFT) -->
-        <div class="col-md-6" style="margin-top:11%;">
+        <div class="col-md-6" style="margin-top:2%;">
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
@@ -77,7 +114,9 @@ $areachart->render()
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="line-chart" style="height: 300px;"></div>
+             {!!
+                $linechart->render()
+                !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -95,7 +134,9 @@ $areachart->render()
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="bar-chart" style="height: 300px;"></div>
+             {!!  
+                $barchart->render()
+                !!}
             </div>
             <!-- /.box-body -->
           </div>
@@ -105,7 +146,7 @@ $areachart->render()
 
 
 
-           <div class="col-md-6" style="margin-top:11%;">
+           <div class="col-md-6" style="margin-top:2%;">
             <!-- LINE CHART -->
             <div class="box-body chart-responsive">
               <div class="chart" id="dual_x_div" style="height: 300px; position: relative;"></div>

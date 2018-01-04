@@ -25,14 +25,25 @@
 
                                       </div>
                                     <br/>
+<!--
+                                    <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-product-hunt">&nbsp;Color</i></span>
+                <input type="text" class="form-control" placeholder="Enter Colour" name="color" required >
+              </div><br/>
+-->
                                     <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-th-list">&nbsp;Color</i></span>
                                      <select class="form-control select2" style="width: 100%;    height: 30px;" name="color" id="" required >
 
 
                                           <option>Select</option>
-                                          <option value="red">Red</option>
+                                         
                                           <option value="black">Black</option>
+                                          <option value="mattblack">Matt Black</option>
+                                          <option value="red">Red</option>
+                                          <option value="mattred">Matt Red</option>
+                                          <option value="blue">Blue</option>
+                                          <option value="gray">Gray</option>
                                           <option value="white">White</option>
 
 
@@ -47,13 +58,19 @@
                 <span class="input-group-addon"><i class="fa fa-list">&nbsp;Chasis Number</i></span>
                 <input type="text" class="form-control" placeholder="Chasis Number" name="chasis" required ><br/>
               </div><br/>
+<!--
                                      <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-money">&nbsp;Quantity</i></span>
                 <input type="text" class="form-control" placeholder="Quantity" name="quantity" required ><br/>
               </div><br/>
+-->
                                     <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-money">&nbsp;Reg_no</i></span>
                 <input type="text" class="form-control" placeholder="Registration Number" name="reg_no" required ><br/>
+              </div><br/>
+                                     <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Purchase Price in NRS</i></span>
+                 <input type="text" class="form-control" placeholder="Unit Price" name="purchaseprice" required ><br/>
               </div><br/>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Unit Price in NRS</i></span>
@@ -129,9 +146,14 @@
 
 
                                           <option>Select</option>
-                                          <option value="red">Red</option>
                                           <option value="black">Black</option>
+                                          <option value="mattblack">Matt Black</option>
+                                          <option value="red">Red</option>
+                                          <option value="mattred">Matt Red</option>
+                                          <option value="blue">Blue</option>
+                                          <option value="gray">Gray</option>
                                           <option value="white">White</option>
+
 
 
                                         </select>
@@ -146,10 +168,17 @@
                 <input type="text" class="form-control" placeholder="Parts Name" name="partsname" required >
               </div><br/>
 
-
+                                    <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Quantity</i></span>
+                 <input type="number" class="form-control" placeholder="Quantity" name="quantity" required ><br/>
+              </div><br/>
+                                    <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Purchase Price in NRS</i></span>
+                 <input type="text" class="form-control" placeholder="Unit Price" name="purchaseprice" required ><br/>
+              </div><br/>
 
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Unit Price in NRS</i></span>
+                <span class="input-group-addon"><i class="fa fa-picture-o">&nbsp;Sale Price in NRS</i></span>
                  <input type="text" class="form-control" placeholder="Unit Price" name="unitprice" required ><br/>
               </div><br/>
                                       <div class="input-group">
@@ -414,7 +443,7 @@
                                     <div class="tab-pane fade in active" id="home_else">
                                       <h4>Import File Directly:</h4>
                                          <p>See Demo</p>
-                                        <a href="{{ asset('resources/demobike.ods') }}" style="color:#fff;"><button class="btn btn-danger" style="height: 40px;width: 180px;">Demo File</button></a>
+                                        <a href="{{ asset('resources/demobikestock.ods') }}" style="color:#fff;"><button class="btn btn-danger" style="height: 40px;width: 180px;">Demo File</button></a>
                               				<form style="border: 1px solid #a1a1a1;margin-top: 3px;padding: 10px;" action="{{ URL::to('importExcelBike') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
 
                               					<input type="file" name="import_file" style="margin: 0;    display: inline-block;
@@ -448,7 +477,13 @@
                     <td>{{$c->model}}</td>
                     <td>{{$c->units}}</td>
                     
-                    <td>Check</td>
+                    <td> <a  href="{{route('inventorybikeupdate.edit',$c->id)}}">Edit</a>
+                        <a> 
+                            {!! Form::open(['method'=>'DELETE', 'route'=>['inventorybikeupdate.destroy',$c->id],'style'=>'display:inline-block']) !!}
+                            {!! Form::submit('DELETE',['class'=>'btn btn-danger']) !!}
+                            {!! Form::close() !!}
+                            </a>
+                        </td>
                     
                     
                     </tr>
@@ -463,7 +498,7 @@
                                     <div class="tab-pane fade" id="profile_else">
                                       <h4>Import File Directly:</h4>
                                         <p>See Demo</p>
-                                        <a href="{{ asset('resources/demo.ods') }}" style="color:#fff !important;"><button class="btn btn-danger" style="height: 40px;width: 180px;">Demo File</button></a>
+                                        <a href="{{ asset('resources/demopartsstock.ods') }}" style="color:#fff !important;"><button class="btn btn-danger" style="height: 40px;width: 180px;">Demo File</button></a>
                               				<form style="border: 1px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('importExcelPart') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
 
                               					<input type="file" name="import_file" style="margin: 0;    display: inline-block;
@@ -484,6 +519,7 @@
                 
               
                   <th>Parts Model</th>
+                  <th>Bike Model</th>
                   <th>Stock</th>
                  
                   <th>Action</th>
@@ -494,9 +530,16 @@
                     <tr>
                         
                     <td>{{$c1->parts_name}}</td>
+                    <td>{{$c1->bike_model}}</td>
                     <td>{{$c1->units}}</td>
                     
-                    <td>Check</td>
+                        <td> <a  href="{{route('inventorybikepartupdate.edit',$c1->id)}}">Edit</a>
+                        <a> 
+                            {!! Form::open(['method'=>'DELETE', 'route'=>['inventorybikepartupdate.destroy',$c1->id],'style'=>'display:inline-block']) !!}
+                            {!! Form::submit('DELETE',['class'=>'btn btn-danger']) !!}
+                            {!! Form::close() !!}
+                            </a>
+                        </td>
                     
                     
                     </tr>

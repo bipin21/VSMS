@@ -49,7 +49,7 @@
         '<td><select class="form-control servicetype" name="servicetype[]"><option>Select</option><option value="free">Free</option><option value="paid">Paid</option></select></td>'+'<td><input type="text" name="timedays[]" class="timedays form-contol"  style="width:90px;"></td>'+
                '<td>  <input type="text" name="cost[]" class="cost form-contol"  style="width:110px;"></td>'+
             '<td> <textarea name="message[]" class="message form-contol"  style="width:400px;"></textarea></td>'+
-            '<td><a href="" class="btn btn-danger delete">Delete</a></td></tr>';
+            '<td><a href="" class="btn btn-danger delete"  style="position: relative;">Delete</a></td></tr>';
            
            
           
@@ -65,9 +65,10 @@
 <div class="col-md-12">
 <form  action="{{action('ServiceController@saveservice')}}" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token()}}" />
-<table class="table">
+<table class="">
     <tr>
-        <td>Bike Model</td><td>
+        <td style="    width: 170px;">Bike Model</td>
+        <td style="    width: 170px;">
         <select name="bikemodel" class="form-control">
         <option>Select</option>
             @foreach($b as $bk)
@@ -120,7 +121,7 @@
                 </textarea>
         </td>
             <td>
-   <a href="" class="btn btn-danger delete">Delete</a>
+   <a href="" class="btn btn-danger delete" style="position: relative;">Delete</a>
   
         </td>
         </tr>
@@ -128,6 +129,7 @@
    
 </table>
     <input type="button" class="btn btn-primary add" value="Add Row +" />
+    
 <input type="submit" value="Save Services" name="save" class="btn btn-success"/>
 </form>
 

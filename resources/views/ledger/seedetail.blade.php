@@ -112,8 +112,6 @@
 								
 		
 
-
-<footer class="footer text-center"> 2018 &copy; VSMS- Stock Management System by Valiant Tech Pvt. Ltd. </footer>
            
 </div>
 @endsection

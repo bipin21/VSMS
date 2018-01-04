@@ -9,7 +9,7 @@
 									
                                          <section class="content-header">
       <h1>
-       Enquiry
+       Staff
         <small>Management</small>
       </h1>
       <ol class="breadcrumb">
@@ -21,45 +21,44 @@
 <section class="content">
     <div class="box container box-success"><br>
      
-        <a href="enquiry" class="btn btn-success">Back to Enquiry</a><br><br>
-            <form method="POST" action="{{route('enquiry.add')}}" accept-charset="UTF-8" enctype="multipart/form-data"><input name="" type="hidden" value="">
+        <a href="staff" class="btn btn-success">Back to Staff</a><br><br>
+            {!! Form::model($editid, ['method' => 'PATCH','route' => ['staff.update', $editid->id]]) !!}
             
                
                  <div class="form-group">
                 <label for="title">Full Name</label>
-                <input class="form-control" name="ename" type="text" id="title" required> 
+                <input class="form-control" name="sname" type="text" value="{{$editid->name}}" id="title" required> 
                 </div>
                 
               <div class="form-group">
                 <label for="title">Address</label>
-                <input class="form-control" name="eaddress" type="text" id="title" required> 
+                <input class="form-control" name="saddress" type="text" value="{{$editid->address}}" id="title" required> 
                 </div>
                 <div class="form-group">
                 <label for="title"> Phone</label>
-                <input class="form-control" name="ephone" type="text" id="title" required> 
+                <input class="form-control" name="sphone" type="text" id="title" value="{{$editid->phone}}" required> 
                 </div>
+               
                 <div class="form-group">
-                <label for="title"> Enquiry About</label>
-                <input class="form-control" name="etopic" type="text" id="title" required> 
+                <label for="title"> Start Date</label>
+                <input class="form-control" name="sdate" type="date" value="{{$editid->sdate}}" id="title" required> 
                 </div>
-                <div class="form-group">
-                <label for="title"> Date</label>
-                <input class="form-control" name="edate" type="date" id="title" required> 
+                 <div class="form-group">
+                <label for="title"> Post</label>
+                <input class="form-control" name="spost" type="text" value="{{$editid->spost}}" id="title" required> 
+                </div> 
+                 <div class="form-group">
+                <label for="title"> Type</label>
+                <input class="form-control" name="stype" type="text" id="title" value="{{$editid->stype}}" required> 
                 </div>
+
                 
-                <div class="form-group">
-                <label for="title">Message</label>
-                <textarea class="form-control" name="edetails" required>
-                    
-                    </textarea>
-                </div>
-                
-<input type="hidden" name="userid" value="{{Auth::user()->id}}"/>
+
            <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-          
+          <input type="hidden" name="editid" value="{{$editid->id}}"/>
             <input class="btn btn-danger" type="reset" value="Clear">
             <input class="btn btn-primary" type="submit" value="Submit" name="addcontent"> <br><br>                                                             
-        </form>
+       {!! Form::close() !!}
     
     </div>
 </section><!-- /.content -->
@@ -75,5 +74,6 @@
 		
 
 
+<footer class="footer text-center"> 2018 &copy; VSMS- Stock Management System by Valiant Tech Pvt. Ltd. </footer>
 </div>
 @endsection
